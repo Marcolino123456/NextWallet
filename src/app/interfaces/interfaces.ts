@@ -13,6 +13,11 @@ export interface allCoinsProps {
   high_24h: number,
   low_24h: number
 }
+
+export interface allCoinsHomeProps {
+  coins: allCoinsProps[]
+}
+
 export interface coinsWalletProps {
   id: string,
   name: string,
