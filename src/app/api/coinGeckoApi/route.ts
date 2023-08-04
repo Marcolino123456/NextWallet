@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export const revalidate = 60
 
 export async function GET(req: Request) {
-  const res = await fetch(`${process.env.API_COINGECKO}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_COINGECKO}`);
   const data = await res.json()
 
   return NextResponse.json({ data }, {
