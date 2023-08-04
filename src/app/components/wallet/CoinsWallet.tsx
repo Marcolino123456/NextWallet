@@ -28,7 +28,7 @@ const CoinsWallet = ({ coins }: allCoinsHomeProps) => {
   useEffect(() => {
     setAllCoins(coins)
     const interval = setInterval(async () => {
-      const { data } = await axios.get('http://localhost:3000/api/coinGeckoApi')
+      const { data } = await axios.get('/api/coinGeckoApi')
       const resp = await data.data
       setAllCoins(resp)
     }, 65000)
