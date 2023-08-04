@@ -2,13 +2,13 @@
 
 import { snapshotDocHome } from "@/app/firebase/snapshot/snapshotDocHome";
 import { updateDocHome } from "@/app/firebase/updateDocs/updateDocHome";
-import { allCoinsHomeProps, allCoinsProps, coinsWalletProps } from "@/app/interfaces/interfaces";
+import { allCoinsProps, coinsWalletProps } from "@/app/interfaces/interfaces";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi"
 import { IoWallet } from "react-icons/io5"
 
-const UserData = ({ coins }: allCoinsHomeProps) => {
+const UserData = () => {
 
   const [coinsWallet, setCoinsWallet] = useState<coinsWalletProps[]>([])
   const [allCoins, setAllCoins] = useState<allCoinsProps[]>([])
@@ -23,14 +23,20 @@ const UserData = ({ coins }: allCoinsHomeProps) => {
   }, [])
 
   useEffect(() => {
-    setAllCoins(coins)
+    const apiCoin = async () => {
+      const { data } = await axios.get('/api/coinGeckoApi')
+      const resp = await data.data
+      setAllCoins(resp)
+    }
+    apiCoin()
+
     const interval = setInterval(async () => {
-      const { data } = await axios.get('http://localhost:3000/api/coinGeckoApi')
+      const { data } = await axios.get('/api/coinGeckoApi')
       const resp = await data.data
       setAllCoins(resp)
     }, 65000)
     return () => clearInterval(interval)
-  }, [coins])
+  }, [])
 
   useEffect(() => {
     if (allCoins[0] != undefined) {

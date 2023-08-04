@@ -1,6 +1,5 @@
 import CoinsWallet from "@/app/components/wallet/CoinsWallet";
 import { getCurrentUser } from "@/app/libs/session";
-import axios from "axios";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -18,12 +17,9 @@ export default async function Wallet() {
     redirect('/')
   }
 
-  const { data } = await axios.get('http://localhost:3000/api/coinGeckoApi')
-  const resp = await data.data
-
   return (
     <div className="flex w-full h-auto items-center justify-center mt-5">
-      <CoinsWallet coins={resp} />
+      <CoinsWallet />
     </div>
   );
 }
