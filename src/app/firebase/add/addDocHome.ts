@@ -4,7 +4,7 @@ import { db } from "../../libs/firebase"
 
 export const addDocHome = async (id: string) => {
   if (id) {
-    const { data } = await axios.get(`http://localhost:3000/api/dynamicApi/${id}`)
+    const { data } = await axios.get(`/api/dynamicApi/${id}`)
     const resp = await data.data
 
     const payload = {
